@@ -1,11 +1,12 @@
 "use client"
 
 import { useEffect, useState } from "react"
-//import Header from "../components/Header"
+import Header from "../components/Header"
 import MovieRow from "../components/MovieRow"
 
 // Usar el token de API como una variable de entorno
-const API_TOKEN = process.env.API_KEY
+
+const API_TOKEN = process.env.NEXT_PUBLIC_API_KEY
 export default function Home() {
   const [trendingMovies, setTrendingMovies] = useState([])
   const [topRatedMovies, setTopRatedMovies] = useState([])
@@ -50,7 +51,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
-      {/* <Header/> */}
+      <Header/>
       <main className="container mx-auto px-4 py-4">
         {isLoading ? (
           <div className="text-center">Cargando...</div>
