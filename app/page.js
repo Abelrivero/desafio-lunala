@@ -1,95 +1,68 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client"
 
+import { useEffect, useState } from "react"
+//import Header from "../components/Header"
+import MovieRow from "../components/MovieRow"
+
+// Usar el token de API como una variable de entorno
+const API_TOKEN = process.env.API_KEY
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [trendingMovies, setTrendingMovies] = useState([])
+  const [topRatedMovies, setTopRatedMovies] = useState([])
+  const [upcomingMovies, setUpcomingMovies] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const options = {
+          method: "GET",
+          headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${API_TOKEN}`,
+          },
+        }
+
+        const [trendingRes, topRatedRes, upcomingRes] = await Promise.all([
+          fetch("https://api.themoviedb.org/3/trending/movie/week", options),
+          fetch("https://api.themoviedb.org/3/movie/top_rated", options),
+          fetch("https://api.themoviedb.org/3/movie/upcoming", options),
+        ])
+
+        const [trending, topRated, upcoming] = await Promise.all([
+          trendingRes.json(),
+          topRatedRes.json(),
+          upcomingRes.json(),
+        ])
+
+        setTrendingMovies(trending.results)
+        setTopRatedMovies(topRated.results)
+        setUpcomingMovies(upcoming.results)
+      } catch (error) {
+        console.error("Error fetching movies:", error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchMovies()
+  }, [])
+
+  return (
+    <div className="min-h-screen bg-gray-900 text-white">
+      {/* <Header/> */}
+      <main className="container mx-auto px-4 py-4">
+        {isLoading ? (
+          <div className="text-center">Cargando...</div>
+        ) : (
+          <>
+            <MovieRow title="Tendencias de la semana" movies={trendingMovies} />
+            <MovieRow title="Mejor valoradas" movies={topRatedMovies} />
+            <MovieRow title="Próximos estrenos" movies={upcomingMovies} />
+          </>
+        )}
       </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
-  );
+  )
 }
+
