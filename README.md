@@ -1,7 +1,7 @@
 # Desafío Lunala
 
 ## Descripción
-Este proyecto es un clon de la interfaz de una plataforma de streaming, desarrollado para el desafío propuesto. La aplicación obtiene y muestra películas desde la API de [The Movie Database (TMDb)](https://www.themoviedb.org/documentation/api) e incluye funcionalidades como:
+Este proyecto es un clon de la interfaz de una plataforma de Peliculas y series, desarrollado para el desafío propuesto. La aplicación obtiene y muestra películas desde la API de [The Movie Database (TMDb)](https://www.themoviedb.org/documentation/api) e incluye funcionalidades como:
 - Sección de películas en tendencia, mejor valoradas y próximos estrenos.
 - Búsqueda dinámica de películas.
 - Filtrado por categorías.
