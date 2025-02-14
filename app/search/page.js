@@ -20,6 +20,15 @@ export default function Search() {
     },
   };
 
+  function debounce(callback, delay) {
+    let timeoutId;
+  
+    return function() {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(callback, delay);
+    }
+  }
+
   useEffect(() => {
     //Consulta y Carga las Categorias al Select
     const fetchCategories = async () => {
@@ -65,7 +74,9 @@ export default function Search() {
 
   //Busca Peliculas por Titulo
   const fetchMovies = async (searchTerm) => {
-    if (!searchTerm.trim()) {
+    console.log(searchTerm);
+    
+    if (!searchTerm.trim() || searchTerm == "") {
       setMovies([]); 
       setSelectedGenre(""); 
       return;
@@ -86,14 +97,17 @@ export default function Search() {
   const handleSearch = (event) => {
     const searchTerm = event.target.value;
     setSearch(searchTerm);
-
     if (!searchTerm.trim()) {
       setMovies([]); 
       setSelectedGenre(""); 
       return;
     }
-
-    setTimeout(() => fetchMovies(searchTerm), 1500);
+    if(searchTerm.length > 3 ){
+      const debounceFetchMovies = debounce(() => fetchMovies(searchTerm), 1000);
+      debounceFetchMovies();
+    }else{
+      setMovies([]);
+    }
   };
 
   return (
