@@ -139,3 +139,45 @@ ul {
   cursor: "pointer";
   border-radius: "30px";
 }
+.carousel-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;  
+  -ms-overflow-style: none; 
+  gap: 10px;
+  padding: 10px 0;
+  width: 100%;
+}
+
+/* Ocultar scrollbar en Chrome/Safari */
+.carousel-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Estilos de los botones */
+.carousel-btn { 
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 18px;
+  z-index: 10;
+  transition: background 0.3s;
+}
+
+.carousel-btn:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-btn.left {
+  left: 5px;
+}
+
+.carousel-btn.right {
+  right: 5px;
+}
+

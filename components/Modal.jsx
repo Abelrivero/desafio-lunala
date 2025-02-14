@@ -10,8 +10,10 @@ export default function Modal({ isOpen, onClose, title, children, movie}) {
             alt={movie.title}
             width={144}
             height={216}/>
-          <p className="text-dark">Descripcion: {movie.overview}</p>
-          <p className="text-dark">Fecha de Estreno: {movie.release_date || movie.first_air_date}</p>
+          <div className="prueba">
+            <p className="text-dark">Descripcion: {movie.overview}</p>
+            <p className="text-dark">Fecha de Estreno: {movie.release_date || movie.first_air_date}</p>
+          </div>
           <button className="close-button" onClick={onClose}>✖</button>
           <div className="modal-body">{children}</div>
         </div>
