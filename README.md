@@ -31,7 +31,8 @@ npm run dev
 Una vez iniciado el servidor, abre http://localhost:3000 en tu navegador para ver la aplicación. La estructura de la app incluye:
 
 **COMPOSICION DE LA APP**
-# -Página Principal: Muestra secciones de películas en tendencia, mejor valoradas y próximos estrenos.
+**
+-Página Principal: Muestra secciones de películas en tendencia, mejor valoradas y próximos estrenos.
 # -Seccion de Peliculas: Muesta un listado de algunas peliculas
 # -Seccion de Series: Muesta un listado de algunas series
 # -Búsqueda: Permite buscar películas por titulo o filtrarlas por categorías.
