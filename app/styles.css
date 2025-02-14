@@ -72,6 +72,9 @@ ul {
 .items-center {
   align-items: center;
 }
+.flex-grid{
+  display: 	grid;
+}
 .search-input, .search-select {
   padding: 0.5rem;
   border: 1px solid #4a5568;
@@ -100,6 +103,18 @@ ul {
 }
 .text-dark{
   color: #000000;
+}
+.display-none{
+  display: none;
+}
+.justify-content-end{
+  justify-content: end;
+}
+.justify-item-center{
+  justify-items: center;
+}
+.aling-item-center{
+  align-items: center;
 }
 .modal-overlay {
   position: fixed;
@@ -133,11 +148,27 @@ ul {
 .modal-body {
   margin-top: 10px;
 }
-.toggleButton{
-  padding: "3px";
-  border: "1px solid";
-  cursor: "pointer";
-  border-radius: "30px";
+.toggleButton {
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  border: none;
+  cursor: pointer;
+  border-radius: 50px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s, transform 0.2s ease-in-out;
+}
+
+.toggleButton:hover {
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  transform: scale(1.1);
+}
+
+.toggleButton:active {
+  transform: scale(0.95);
 }
 .carousel-container {
   display: flex;
@@ -149,12 +180,10 @@ ul {
   padding: 10px 0;
   width: 100%;
 }
-
 /* Ocultar scrollbar en Chrome/Safari */
 .carousel-container::-webkit-scrollbar {
   display: none;
 }
-
 /* Estilos de los botones */
 .carousel-btn { 
   top: 50%;
@@ -168,16 +197,23 @@ ul {
   z-index: 10;
   transition: background 0.3s;
 }
-
 .carousel-btn:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
-
 .carousel-btn.left {
   left: 5px;
 }
-
 .carousel-btn.right {
   right: 5px;
 }
 
+@media (max-width: 752px) {
+  .sm\:hidden{
+    display: none;
+  }
+}
+@media (min-width: 768px) {
+  .lg\:hidden{
+    display: none;
+  }
+}

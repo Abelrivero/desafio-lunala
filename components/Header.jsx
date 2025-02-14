@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import ThemeToggle from "./ThemeToggle"
+import HamburgerMenu from "./HamburgerMenu"
 
 export default function Header() {
    return (
@@ -10,8 +11,7 @@ export default function Header() {
         <Link href="/" className="text-white text-2xl font-bold">
           Memetflix
         </Link>
-          {/* <InputSerch /> */}
-        <nav className="flex gap-1">
+        <nav className="flex gap-1 sm:hidden aling-item-center">
           <ul className="flex gap-1">
             <li>
               <Link href="/" className="text-white hover:text-lila font-semibold">
@@ -36,6 +36,8 @@ export default function Header() {
           </ul>
           <ThemeToggle />
         </nav>
+
+        <HamburgerMenu />
       </div>
     </header>
   )
